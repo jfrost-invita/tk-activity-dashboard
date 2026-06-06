@@ -16,7 +16,7 @@ import sys
 # Both app.py and invita_report_lib.py live in the same directory as this script
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app import fetch_activity, fetch_sr_activity
+from app import fetch_activity, fetch_sr_activity, fetch_epic_progress
 
 REPO_ROOT  = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(REPO_ROOT, "docs", "data")
@@ -27,7 +27,7 @@ def write_json(filename: str, data: dict) -> None:
     path = os.path.join(OUTPUT_DIR, filename)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2, ensure_ascii=False)
-    count = data.get("total_tickets", data.get("total_srs", "?"))
+    count = data.get("total_tickets", data.get("total_srs", data.get("total_epics", "?")))
     print(f"  ✓ {filename}  ({count} items)  →  {path}")
 
 
@@ -40,6 +40,9 @@ def main() -> None:
 
     print("Fetching SR Activity…")
     write_json("sr-activity.json", fetch_sr_activity())
+
+    print("Fetching Epic Progress…")
+    write_json("epic-progress.json", fetch_epic_progress())
 
     print("Done.")
 

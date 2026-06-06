@@ -4,10 +4,11 @@ TK Epic Activity Dashboard — app.py
 Flask backend serving live Jira data for the dashboard UI.
 
 Endpoints:
-  GET /                → Dashboard HTML
-  GET /api/activity    → JSON: TK tickets with status changes in last 24h under Executing epics
-  GET /api/sr-activity → JSON: SR tickets with team comments or linked TK work tickets updated
-  GET /health          → {"status": "ok"}
+  GET /                    → Dashboard HTML
+  GET /api/activity        → JSON: TK tickets with status changes in last 24h under Executing epics
+  GET /api/sr-activity     → JSON: SR tickets with team comments or linked TK work tickets updated
+  GET /api/epic-progress   → JSON: Full completion breakdown for all Executing TK epics
+  GET /health              → {"status": "ok"}
 
 Environment variables required (same as other scripts):
   JIRA_USER   — Jira account email
@@ -38,6 +39,19 @@ ISSUE_TYPES = ("Story Bug", "Bug", "Story", "R&D Tech Debt", "Tech Debt")
 
 # Departments that count as "the team"
 TEAM_DEPTS = {"Software Engineering", "Quality Engineering", "FAS"}
+
+# Epics to exclude from the Epic Progress tab
+EPIC_IGNORE_LIST = {"TK-20593", "TK-1156"}
+
+CLOSED_STATUSES = {
+    "Done", "Closed", "Resolved", "Released to Client",
+    "Not a Defect", "Duplicate", "Ready for Acceptance", "Dev Approved",
+}
+ACTIVE_STATUSES = {
+    "In Progress", "In Development", "Code Review", "In Review",
+    "In QA", "QA In Progress", "Ready for QA", "In CR", "In Testing",
+    "Ready for Code Review", "Developing", "Ready for Testing",
+}
 
 
 # ---------------------------------------------------------------------------
@@ -315,6 +329,143 @@ def fetch_sr_activity(window_hours: int = WINDOW_HOURS) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Tab 3 — Epic Progress
+# ---------------------------------------------------------------------------
+
+def _get_executing_date(jira: JiraClient, epic_key: str, fallback_created: str) -> str:
+    """Return the date (YYYY-MM-DD) the epic first transitioned to Executing."""
+    try:
+        histories = jira.get_issue_changelog(epic_key)
+        for history in histories:
+            for item in history.get("items", []):
+                if item.get("field") == "status" and item.get("toString") == "Executing":
+                    return history["created"][:10]
+    except Exception:
+        pass
+    return fallback_created[:10]
+
+
+def _parse_tickets(raw: list) -> list:
+    out = []
+    for issue in raw:
+        fields = issue["fields"]
+        status = (fields.get("status") or {}).get("name", "")
+        out.append({
+            "key":      issue["key"],
+            "type":     (fields.get("issuetype") or {}).get("name", ""),
+            "status":   status,
+            "summary":  fields.get("summary", ""),
+            "assignee": (fields.get("assignee") or {}).get("displayName", "Unassigned"),
+            "url":      f"{JIRA_BASE}/browse/{issue['key']}",
+            "closed":   status in CLOSED_STATUSES,
+            "active":   status in ACTIVE_STATUSES,
+        })
+    return out
+
+
+def _bucket_summary(tickets: list) -> dict:
+    """Return {total, done, open, pct} for a list of tickets."""
+    total = len(tickets)
+    done  = sum(1 for t in tickets if t["closed"])
+    return {
+        "total": total,
+        "done":  done,
+        "open":  total - done,
+        "pct":   round(done / total * 100) if total else 0,
+    }
+
+
+def fetch_epic_progress() -> dict:
+    """Full completion breakdown for all Executing TK epics."""
+    import time
+    jira = JiraClient()
+    now  = datetime.now(timezone.utc)
+
+    # ── 1. All Executing epics ─────────────────────────────────────────────
+    epics_raw = jira.search_jql(
+        "project=TK AND issuetype=Epic AND status=Executing ORDER BY key ASC",
+        ["summary", "assignee", "created"],
+    )
+    epics_raw = [e for e in epics_raw if e["key"] not in EPIC_IGNORE_LIST]
+
+    ticket_fields = ["summary", "issuetype", "status", "assignee"]
+    results = []
+
+    for epic in epics_raw:
+        key    = epic["key"]
+        fields = epic["fields"]
+
+        exec_date = _get_executing_date(jira, key, fields.get("created", ""))
+        time.sleep(0.15)
+
+        # Pre-Executing: Stories + Bugs created before the epic entered Executing
+        pre_raw = jira.search_jql(
+            f'project=TK AND parentEpic={key} '
+            f'AND issuetype in ("Story","Bug") '
+            f'AND created <= "{exec_date}"',
+            ticket_fields,
+        )
+        time.sleep(0.1)
+
+        # Post-Executing: Stories, Bugs, Story Bugs created after
+        post_raw = jira.search_jql(
+            f'project=TK AND parentEpic={key} '
+            f'AND issuetype in ("Story","Bug","Story Bug") '
+            f'AND created > "{exec_date}"',
+            ticket_fields,
+        )
+        time.sleep(0.1)
+
+        pre  = _parse_tickets(pre_raw)
+        post = _parse_tickets(post_raw)
+        all_tickets = pre + post
+
+        overall = _bucket_summary(all_tickets)
+
+        # Pre breakdown by type
+        pre_by_type = [
+            {"type": t, **_bucket_summary([x for x in pre if x["type"] == t])}
+            for t in ("Story", "Bug")
+            if any(x["type"] == t for x in pre)
+        ]
+
+        # Post breakdown by type
+        post_by_type = [
+            {"type": t, **_bucket_summary([x for x in post if x["type"] == t])}
+            for t in ("Story", "Bug", "Story Bug")
+            if any(x["type"] == t for x in post)
+        ]
+
+        in_progress = sorted(
+            [t for t in all_tickets if t["active"]],
+            key=lambda x: (x["type"], x["key"]),
+        )
+
+        results.append({
+            "key":         key,
+            "name":        fields.get("summary", ""),
+            "assignee":    (fields.get("assignee") or {}).get("displayName", "Unassigned"),
+            "exec_date":   exec_date,
+            "url":         f"{JIRA_BASE}/browse/{key}",
+            "total":       overall["total"],
+            "done":        overall["done"],
+            "open":        overall["open"],
+            "pct":         overall["pct"],
+            "pre_count":   len(pre),
+            "post_count":  len(post),
+            "pre_by_type":  pre_by_type,
+            "post_by_type": post_by_type,
+            "in_progress":  in_progress,
+        })
+
+    return {
+        "generated_at": now.strftime("%Y-%m-%d %H:%M UTC"),
+        "total_epics":  len(results),
+        "epics":        results,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
 
@@ -339,6 +490,18 @@ def api_activity():
 def api_sr_activity():
     try:
         data = fetch_sr_activity()
+        return jsonify(data)
+    except Exception as exc:
+        import traceback
+        tb = traceback.format_exc()
+        print(tb)
+        return jsonify({"error": str(exc), "traceback": tb}), 500
+
+
+@app.route("/api/epic-progress")
+def api_epic_progress():
+    try:
+        data = fetch_epic_progress()
         return jsonify(data)
     except Exception as exc:
         import traceback
