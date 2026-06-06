@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-06 12:03 UTC",
-  "since": "2026-06-05 12:03",
+  "generated_at": "2026-06-06 14:23 UTC",
+  "since": "2026-06-05 14:23",
   "window_hours": 24,
-  "total_tickets": 3,
+  "total_tickets": 1,
   "total_epics": 1,
   "epics": [
     {
@@ -23,38 +23,6 @@
               "to": "In Code Review",
               "when": "Jun 05, 15:23 UTC",
               "when_iso": "2026-06-05T15:23:58.341000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21456",
-          "summary": "Unexpected Kits - MF Uncollected -> LAB Wizards",
-          "type": "Bug",
-          "status": "Reopened",
-          "assignee": "Nicolas Gamache",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21456",
-          "transitions": [
-            {
-              "from": "In Testing",
-              "to": "Reopened",
-              "when": "Jun 05, 14:14 UTC",
-              "when_iso": "2026-06-05T14:14:37.780000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21837",
-          "summary": "LAB | Receive Kit Wizard | Report To Law Enforcement and Medical Facility fields are missing",
-          "type": "Bug",
-          "status": "In Code Review",
-          "assignee": "Nicolas Gamache",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21837",
-          "transitions": [
-            {
-              "from": "In Progress",
-              "to": "In Code Review",
-              "when": "Jun 05, 12:29 UTC",
-              "when_iso": "2026-06-05T12:29:28.730000-04:00"
             }
           ]
         }
