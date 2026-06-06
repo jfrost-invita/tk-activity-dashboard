@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-06 16:01 UTC",
-  "since": "2026-06-05 16:01",
+  "generated_at": "2026-06-06 17:59 UTC",
+  "since": "2026-06-05 17:59",
   "window_hours": 24,
-  "total_srs": 7,
+  "total_srs": 3,
   "results": [
     {
       "key": "SR-11373",
@@ -69,80 +69,6 @@
           "dept": "FAS",
           "when": "Jun 05, 17:43 UTC",
           "preview": "I just tested a kit that follows the same path as FLTSTPC0031 and the LEA Tracking Complete does display.  Or were you referring to the name of the LEA does not…"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11247",
-      "summary": "Labs would like to have the option of a backdate feature when accepting an inbound batch from outsourced kits.",
-      "status": "Open",
-      "priority": "3",
-      "reporter": "Tracy Majors",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11247",
-      "team_comments": [],
-      "linked_tk": [
-        {
-          "key": "TK-21784",
-          "summary": "[MD] - SAK 2027 Enhancements",
-          "status": "Preparing",
-          "type": "Epic",
-          "assignee": "David Darby",
-          "dept": "FAS",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21784"
-        }
-      ]
-    },
-    {
-      "key": "SR-11250",
-      "summary": "Future enhancement request - to add an additional status  -  \"Pending Re-test\"",
-      "status": "Open",
-      "priority": "3",
-      "reporter": "Tracy Majors",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11250",
-      "team_comments": [],
-      "linked_tk": [
-        {
-          "key": "TK-21784",
-          "summary": "[MD] - SAK 2027 Enhancements",
-          "status": "Preparing",
-          "type": "Epic",
-          "assignee": "David Darby",
-          "dept": "FAS",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21784"
-        }
-      ]
-    },
-    {
-      "key": "SR-11386",
-      "summary": "Sample Profiles Not Importing into Analysis",
-      "status": "In Queue",
-      "priority": "2",
-      "reporter": "Jeff Hahn",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11386",
-      "team_comments": [
-        {
-          "author": "Mariela Rivera",
-          "dept": "FAS",
-          "when": "Jun 05, 13:20 UTC",
-          "preview": "It looks like they need help walking back samples that were lost during a server hitting max storage.  Could someone on the technical side help get their data b…"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11311",
-      "summary": "STACS server upgrade",
-      "status": "In Queue",
-      "priority": "2",
-      "reporter": "Rakhi Gupta",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11311",
-      "team_comments": [
-        {
-          "author": "Michelle Bonnette",
-          "dept": "FAS",
-          "when": "Jun 05, 12:04 UTC",
-          "preview": "Adding in email received from client for documentation:   HI Michelle,   Yes, I did receive ticket SR-11311, haven’t received any update on it though. Can you p…"
         }
       ],
       "linked_tk": []
