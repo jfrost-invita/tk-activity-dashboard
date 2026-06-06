@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TK Activity Dashboard</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --brand-navy: #0a1628;
+      --brand-blue: #1a56db;
+      --brand-light: #f0f4ff;
+    }
+
+    body { background: #f3f4f8; font-family: "Inter", system-ui, sans-serif; color: #1e2130; }
+
+    /* ── Top bar ── */
+    .top-bar {
+      background: var(--brand-navy);
+      color: #fff;
+      padding: .65rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .top-bar .logo { font-weight: 700; font-size: 1.05rem; letter-spacing: .03em; color: #fff; }
+    .top-bar .divider { flex: 1; }
+    .top-bar .meta { font-size: .78rem; color: #8b9bbd; }
+    .top-bar .meta strong { color: #c9d6f0; }
+    #refresh-btn {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; border-radius: 6px; padding: .25rem .65rem;
+      font-size: .82rem; cursor: pointer; display: flex; align-items: center; gap: .3rem;
+      transition: background .15s;
+    }
+    #refresh-btn:hover { background: rgba(255,255,255,.2); }
+    #refresh-btn.spinning .bi-arrow-clockwise { animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #countdown { font-size: .75rem; color: #94a3b8; margin-left: .3rem; }
+
+    /* ── Tab nav ── */
+    .tab-bar {
+      background: #fff;
+      border-bottom: 1px solid #e2e6f0;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0;
+      position: sticky;
+      top: 44px;
+      z-index: 100;
+    }
+    .tab-btn {
+      padding: .7rem 1.1rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: #6b7280;
+      border: none;
+      background: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      transition: color .15s, border-color .15s;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--brand-blue); }
+    .tab-btn.active { color: var(--brand-blue); border-bottom-color: var(--brand-blue); }
+    .tab-badge {
+      background: #e8eeff; color: #3556c8;
+      border-radius: 10px; padding: .05rem .45rem;
+      font-size: .72rem; font-weight: 700;
+      min-width: 20px; text-align: center;
+    }
+    .tab-btn.active .tab-badge { background: var(--brand-blue); color: #fff; }
+
+    /* ── Summary strip ── */
+    .summary-strip {
+      background: #fff;
+      border-bottom: 1px solid #eef0f6;
+      padding: .55rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: .83rem;
+      color: #5a6380;
+    }
+    .summary-strip .stat { display: flex; align-items: center; gap: .35rem; }
+    .summary-strip .stat .num { font-size: 1.3rem; font-weight: 700; color: var(--brand-blue); line-height: 1; }
+    .window-badge {
+      margin-left: auto;
+      background: var(--brand-light); color: var(--brand-blue);
+      border-radius: 20px; padding: .2rem .65rem;
+      font-size: .78rem; font-weight: 600;
+    }
+
+    /* ── Main ── */
+    .main { padding: 1.25rem 1.5rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Shared: loading / error / empty ── */
+    .state-box { padding: 3rem 1.5rem; text-align: center; }
+    .spinner-ring {
+      width: 40px; height: 40px;
+      border: 3px solid #e2e6f0; border-top-color: var(--brand-blue);
+      border-radius: 50%; animation: spin .8s linear infinite;
+      margin: 0 auto .75rem;
+    }
+
+    /* ── Epic blocks (Tab 1) ── */
+    .epic-block {
+      background: #fff; border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      margin-bottom: 1.25rem; overflow: hidden;
+    }
+    .epic-header {
+      background: linear-gradient(90deg, #f7f9ff, #eef2ff);
+      border-bottom: 1px solid #e2e6f0;
+      padding: .7rem 1.1rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .epic-key { font-size: .78rem; font-weight: 700; color: var(--brand-blue); text-decoration: none; }
+    .epic-key:hover { text-decoration: underline; }
+    .epic-name { font-weight: 600; font-size: .92rem; flex: 1; }
+    .epic-count {
+      background: #e8eeff; color: #3556c8;
+      border-radius: 12px; padding: .1rem .55rem;
+      font-size: .75rem; font-weight: 700;
+    }
+
+    /* ── Ticket table ── */
+    .ticket-table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+    .ticket-table thead th {
+      background: #f8f9fc; color: #7683a0;
+      font-weight: 600; font-size: .73rem; text-transform: uppercase; letter-spacing: .05em;
+      padding: .45rem .9rem; border-bottom: 1px solid #e2e6f0;
+    }
+    .ticket-table tbody tr { border-bottom: 1px solid #f0f2f8; transition: background .1s; }
+    .ticket-table tbody tr:last-child { border-bottom: none; }
+    .ticket-table tbody tr:hover { background: #f7f9ff; }
+    .ticket-table td { padding: .55rem .9rem; vertical-align: middle; }
+    .ticket-key { font-weight: 700; font-size: .8rem; color: var(--brand-blue); text-decoration: none; }
+    .ticket-key:hover { text-decoration: underline; }
+    .ticket-summary { color: #2c3350; line-height: 1.4; max-width: 400px; }
+
+    /* ── Type badges ── */
+    .type-badge {
+      display: inline-block; border-radius: 4px; padding: .15rem .45rem;
+      font-size: .7rem; font-weight: 700; white-space: nowrap; letter-spacing: .02em;
+    }
+    .type-bug       { background: #fee2e2; color: #991b1b; }
+    .type-story-bug { background: #fef3c7; color: #92400e; }
+    .type-story     { background: #dbeafe; color: #1e40af; }
+    .type-tech-debt { background: #ede9fe; color: #5b21b6; }
+    .type-other     { background: #f1f5f9; color: #475569; }
+
+    /* ── Status badges ── */
+    .status-badge {
+      display: inline-block; border-radius: 20px; padding: .18rem .55rem;
+      font-size: .72rem; font-weight: 600; white-space: nowrap;
+    }
+    .s-done    { background: #dcfce7; color: #15803d; }
+    .s-active  { background: #dbeafe; color: #1d4ed8; }
+    .s-review  { background: #fef9c3; color: #a16207; }
+    .s-qa      { background: #fde68a; color: #92400e; }
+    .s-blocked { background: #fee2e2; color: #b91c1c; }
+    .s-default { background: #f1f5f9; color: #475569; }
+
+    /* ── Priority badges ── */
+    .priority-badge {
+      display: inline-flex; align-items: center; gap: .2rem;
+      border-radius: 4px; padding: .15rem .4rem;
+      font-size: .7rem; font-weight: 700; white-space: nowrap;
+    }
+    .p-critical { background: #fee2e2; color: #7f1d1d; }
+    .p-high     { background: #ffedd5; color: #9a3412; }
+    .p-medium   { background: #fef9c3; color: #a16207; }
+    .p-low      { background: #dbeafe; color: #1e40af; }
+    .p-lowest   { background: #f1f5f9; color: #64748b; }
+
+    /* ── Transitions (Tab 1) ── */
+    .transitions { display: flex; flex-direction: column; gap: .3rem; }
+    .transition-pill { display: inline-flex; align-items: center; gap: .3rem; font-size: .72rem; color: #5a6380; white-space: nowrap; }
+    .t-from { color: #64748b; }
+    .t-arrow { color: #94a3b8; }
+    .t-to   { font-weight: 600; color: #1d4ed8; }
+    .t-time { color: #94a3b8; font-size: .68rem; margin-left: .2rem; }
+
+    /* ── Assignee chip ── */
+    .assignee { display: flex; align-items: center; gap: .4rem; white-space: nowrap; }
+    .avatar {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: #c7d2fe; color: #3730a3;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── SR cards (Tab 2) ── */
+    .sr-card {
+      background: #fff; border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      margin-bottom: 1.1rem; overflow: hidden;
+    }
+    .sr-header {
+      padding: .8rem 1.1rem;
+      border-bottom: 1px solid #f0f2f8;
+      display: flex; align-items: flex-start; gap: .65rem; flex-wrap: wrap;
+    }
+    .sr-key { font-weight: 700; font-size: .82rem; color: var(--brand-blue); text-decoration: none; white-space: nowrap; }
+    .sr-key:hover { text-decoration: underline; }
+    .sr-summary { font-weight: 600; font-size: .9rem; color: #1e2130; flex: 1; min-width: 200px; line-height: 1.4; }
+    .sr-meta { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-top: .1rem; }
+    .sr-reporter { font-size: .75rem; color: #6b7280; }
+
+    .sr-body { padding: 0 1.1rem; }
+
+    .sr-section { padding: .65rem 0; border-bottom: 1px solid #f0f2f8; }
+    .sr-section:last-child { border-bottom: none; }
+    .sr-section-label {
+      font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: #94a3b8; margin-bottom: .5rem;
+      display: flex; align-items: center; gap: .35rem;
+    }
+
+    /* Comments */
+    .comment-row {
+      display: flex; gap: .7rem; align-items: flex-start;
+      padding: .4rem 0;
+    }
+    .comment-row + .comment-row { border-top: 1px solid #f5f6fa; }
+    .comment-info { flex: 1; min-width: 0; }
+    .comment-meta { font-size: .75rem; color: #6b7280; margin-bottom: .2rem; }
+    .comment-author { font-weight: 600; color: #374151; }
+    .comment-dept {
+      display: inline-block; background: #f0fdf4; color: #166534;
+      border-radius: 3px; padding: .05rem .3rem;
+      font-size: .65rem; font-weight: 600; margin-left: .3rem;
+    }
+    .comment-preview { font-size: .8rem; color: #4b5563; line-height: 1.5; }
+
+    /* Linked TK mini-table */
+    .tk-mini-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    .tk-mini-table td { padding: .35rem .5rem; vertical-align: middle; }
+    .tk-mini-table tr { border-bottom: 1px solid #f5f6fa; }
+    .tk-mini-table tr:last-child { border-bottom: none; }
+    .tk-mini-table tr:hover { background: #f7f9ff; }
+  </style>
+</head>
+
+<body>
+
+<!-- ── Top bar ── -->
+<div class="top-bar">
+  <span class="logo"><i class="bi bi-activity me-1"></i>TK Activity Dashboard</span>
+  <div class="divider"></div>
+  <span class="meta">Last refreshed: <strong id="last-refreshed">—</strong></span>
+  <span id="countdown"></span>
+  <button id="refresh-btn" onclick="refreshAll()">
+    <i class="bi bi-arrow-clockwise"></i> Refresh
+  </button>
+</div>
+
+<!-- ── Tab bar ── -->
+<div class="tab-bar">
+  <button class="tab-btn active" id="tab-epics-btn" onclick="switchTab('epics')">
+    <i class="bi bi-layers"></i> Epic Activity
+    <span class="tab-badge" id="badge-epics">—</span>
+  </button>
+  <button class="tab-btn" id="tab-srs-btn" onclick="switchTab('srs')">
+    <i class="bi bi-headset"></i> SR Activity
+    <span class="tab-badge" id="badge-srs">—</span>
+  </button>
+</div>
+
+<!-- ── Summary strip ── -->
+<div class="summary-strip" id="summary-epics" style="display:none">
+  <div class="stat"><span class="num" id="stat-tickets">0</span><span>tickets moved</span></div>
+  <div class="stat"><span class="num" id="stat-epics">0</span><span>active epics</span></div>
+  <span class="window-badge"><i class="bi bi-clock me-1"></i>Last 24 hours</span>
+</div>
+<div class="summary-strip" id="summary-srs" style="display:none">
+  <div class="stat"><span class="num" id="stat-srs">0</span><span>customer SRs with team activity</span></div>
+  <span class="window-badge"><i class="bi bi-clock me-1"></i>Last 24 hours</span>
+</div>
+
+<!-- ── Main content ── -->
+<div class="main">
+
+  <!-- Tab 1: Epic Activity -->
+  <div class="tab-content active" id="tab-epics">
+    <div class="state-box" id="epics-loading"><div class="spinner-ring"></div><div class="text-muted">Fetching epic activity…</div></div>
+    <div class="state-box" id="epics-error" style="display:none">
+      <i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i>
+      <div class="mt-2 text-danger fw-semibold" id="epics-error-msg"></div>
+      <button class="btn btn-sm btn-outline-secondary mt-3" onclick="loadEpics()">Try again</button>
+    </div>
+    <div class="state-box" id="epics-empty" style="display:none">
+      <i class="bi bi-check2-circle text-success fs-2"></i>
+      <div class="mt-2 text-muted">No status changes in the last 24 hours.</div>
+    </div>
+    <div id="epics-container"></div>
+  </div>
+
+  <!-- Tab 2: SR Activity -->
+  <div class="tab-content" id="tab-srs">
+    <div class="state-box" id="srs-loading"><div class="spinner-ring"></div><div class="text-muted">Fetching SR activity…</div></div>
+    <div class="state-box" id="srs-error" style="display:none">
+      <i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i>
+      <div class="mt-2 text-danger fw-semibold" id="srs-error-msg"></div>
+      <button class="btn btn-sm btn-outline-secondary mt-3" onclick="loadSRs()">Try again</button>
+    </div>
+    <div class="state-box" id="srs-empty" style="display:none">
+      <i class="bi bi-check2-circle text-success fs-2"></i>
+      <div class="mt-2 text-muted">No SR activity from the team in the last 24 hours.</div>
+    </div>
+    <div id="srs-container"></div>
+  </div>
+
+</div>
+
+<script>
+  const REFRESH_INTERVAL_MS = 60 * 60 * 1000; // 1 hour
+  let countdownTimer = null;
+  let nextRefresh    = null;
+  let activeTab      = "epics";
+
+  // ── Tab switching ──────────────────────────────────────────────────────────
+
+  function switchTab(name) {
+    activeTab = name;
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+    document.querySelectorAll(".summary-strip").forEach(s => s.style.display = "none");
+    document.getElementById(`tab-${name}-btn`).classList.add("active");
+    document.getElementById(`tab-${name}`).classList.add("active");
+    const strip = document.getElementById(`summary-${name}`);
+    if (strip) strip.style.display = "";
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
+  function esc(s) {
+    return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+  function initials(name) {
+    return (name || "?").split(" ").map(p => p[0]).join("").slice(0,2).toUpperCase();
+  }
+
+  function typeClass(t) {
+    const s = (t || "").toLowerCase();
+    if (s === "bug")        return "type-bug";
+    if (s === "story bug")  return "type-story-bug";
+    if (s === "story")      return "type-story";
+    if (s.includes("tech")) return "type-tech-debt";
+    return "type-other";
+  }
+
+  function statusClass(s) {
+    const v = (s || "").toLowerCase();
+    if (["done","closed","resolved","released to client","ready for acceptance",
+         "not a defect","duplicate","dev approved"].some(x => v.includes(x))) return "s-done";
+    if (["blocked"].some(x => v.includes(x)))                                  return "s-blocked";
+    if (["qa","testing","ready for"].some(x => v.includes(x)))                 return "s-qa";
+    if (["code review","review"].some(x => v.includes(x)))                     return "s-review";
+    if (["in progress","in development","development","coding"].some(x => v.includes(x))) return "s-active";
+    return "s-default";
+  }
+
+  function priorityClass(p) {
+    const v = (p || "").toLowerCase();
+    if (["critical","highest"].some(x => v.includes(x))) return "p-critical";
+    if (v.includes("high"))   return "p-high";
+    if (v.includes("medium")) return "p-medium";
+    if (v.includes("low") && !v.includes("lowest")) return "p-low";
+    return "p-lowest";
+  }
+
+  function priorityIcon(p) {
+    const v = (p || "").toLowerCase();
+    if (["critical","highest"].some(x => v.includes(x))) return "bi-arrow-up-circle-fill";
+    if (v.includes("high"))   return "bi-arrow-up";
+    if (v.includes("medium")) return "bi-dash";
+    return "bi-arrow-down";
+  }
+
+  function renderTransitions(transitions) {
+    if (!transitions || transitions.length === 0)
+      return '<span class="text-muted" style="font-size:.72rem">—</span>';
+    return '<div class="transitions">' +
+      transitions.map(t =>
+        `<div class="transition-pill">
+          <span class="t-from">${esc(t.from)}</span>
+          <i class="bi bi-arrow-right t-arrow"></i>
+          <span class="t-to">${esc(t.to)}</span>
+          <span class="t-time">${esc(t.when)}</span>
+        </div>`
+      ).join("") + "</div>";
+  }
+
+  // ── Tab 1: Epic rendering ──────────────────────────────────────────────────
+
+  function renderEpic(epic) {
+    const rows = epic.tickets.map(t => `
+      <tr>
+        <td><a class="ticket-key" href="${esc(t.url)}" target="_blank">${esc(t.key)}</a></td>
+        <td><div class="ticket-summary">${esc(t.summary)}</div></td>
+        <td><span class="type-badge ${typeClass(t.type)}">${esc(t.type)}</span></td>
+        <td>
+          <div class="assignee">
+            <div class="avatar">${esc(initials(t.assignee))}</div>
+            <span>${esc(t.assignee)}</span>
+          </div>
+        </td>
+        <td><span class="status-badge ${statusClass(t.status)}">${esc(t.status)}</span></td>
+        <td>${renderTransitions(t.transitions)}</td>
+      </tr>`).join("");
+
+    return `
+      <div class="epic-block">
+        <div class="epic-header">
+          <a class="epic-key" href="${esc(epic.url)}" target="_blank">${esc(epic.key)}</a>
+          <span class="epic-name">${esc(epic.name)}</span>
+          <span class="epic-count">${epic.tickets.length} ticket${epic.tickets.length !== 1 ? "s" : ""}</span>
+        </div>
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th>Ticket</th><th>Summary</th><th>Type</th>
+              <th>Assignee</th><th>Current Status</th><th>Status Changes</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  }
+
+  // ── Tab 2: SR rendering ────────────────────────────────────────────────────
+
+  function renderSR(sr) {
+    const commentsHtml = sr.team_comments.length === 0 ? "" : `
+      <div class="sr-section">
+        <div class="sr-section-label"><i class="bi bi-chat-left-text"></i>Team Comments</div>
+        ${sr.team_comments.map(c => `
+          <div class="comment-row">
+            <div class="avatar">${esc(initials(c.author))}</div>
+            <div class="comment-info">
+              <div class="comment-meta">
+                <span class="comment-author">${esc(c.author)}</span>
+                <span class="comment-dept">${esc(c.dept)}</span>
+                <span class="ms-1">&middot; ${esc(c.when)}</span>
+              </div>
+              ${c.preview ? `<div class="comment-preview">${esc(c.preview)}</div>` : ""}
+            </div>
+          </div>`).join("")}
+      </div>`;
+
+    const linkedHtml = sr.linked_tk.length === 0 ? "" : `
+      <div class="sr-section">
+        <div class="sr-section-label"><i class="bi bi-link-45deg"></i>Work Tickets</div>
+        <table class="tk-mini-table">
+          ${sr.linked_tk.map(t => `
+            <tr>
+              <td style="width:90px"><a class="ticket-key" href="${esc(t.url)}" target="_blank">${esc(t.key)}</a></td>
+              <td><span class="ticket-summary" style="max-width:360px;display:block">${esc(t.summary)}</span></td>
+              <td style="width:110px"><span class="type-badge ${typeClass(t.type)}">${esc(t.type)}</span></td>
+              <td style="width:140px">
+                <div class="assignee">
+                  <div class="avatar" style="width:22px;height:22px;font-size:.6rem">${esc(initials(t.assignee))}</div>
+                  <span style="font-size:.78rem">${esc(t.assignee)}</span>
+                </div>
+              </td>
+              <td style="width:150px"><span class="status-badge ${statusClass(t.status)}">${esc(t.status)}</span></td>
+            </tr>`).join("")}
+        </table>
+      </div>`;
+
+    return `
+      <div class="sr-card">
+        <div class="sr-header">
+          <div style="display:flex;flex-direction:column;gap:.3rem;flex:1">
+            <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+              <a class="sr-key" href="${esc(sr.url)}" target="_blank">${esc(sr.key)}</a>
+              <span class="sr-summary">${esc(sr.summary)}</span>
+            </div>
+            <div class="sr-meta">
+              ${sr.priority ? `<span class="priority-badge ${priorityClass(sr.priority)}"><i class="bi ${priorityIcon(sr.priority)}"></i>${esc(sr.priority)}</span>` : ""}
+              <span class="status-badge ${statusClass(sr.status)}">${esc(sr.status)}</span>
+              <span class="sr-reporter"><i class="bi bi-person me-1"></i>${esc(sr.reporter)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="sr-body">
+          ${commentsHtml}
+          ${linkedHtml}
+        </div>
+      </div>`;
+  }
+
+  // ── Fetch functions ────────────────────────────────────────────────────────
+
+  async function loadEpics() {
+    document.getElementById("epics-loading").style.display = "";
+    document.getElementById("epics-error").style.display   = "none";
+    document.getElementById("epics-empty").style.display   = "none";
+    document.getElementById("epics-container").innerHTML   = "";
+    document.getElementById("summary-epics").style.display = "none";
+    try {
+      const data = await fetchJSON("/api/activity");
+      document.getElementById("stat-tickets").textContent = data.total_tickets;
+      document.getElementById("stat-epics").textContent   = data.total_epics;
+      document.getElementById("badge-epics").textContent  = data.total_tickets;
+      document.getElementById("summary-epics").style.display = activeTab === "epics" ? "" : "none";
+      document.getElementById("epics-loading").style.display = "none";
+      if (data.epics.length === 0) {
+        document.getElementById("epics-empty").style.display = "";
+      } else {
+        document.getElementById("epics-container").innerHTML = data.epics.map(renderEpic).join("");
+      }
+    } catch (err) {
+      document.getElementById("epics-loading").style.display = "none";
+      document.getElementById("epics-error-msg").textContent = err.message;
+      document.getElementById("epics-error").style.display   = "";
+      document.getElementById("badge-epics").textContent = "!";
+    }
+  }
+
+  async function loadSRs() {
+    document.getElementById("srs-loading").style.display = "";
+    document.getElementById("srs-error").style.display   = "none";
+    document.getElementById("srs-empty").style.display   = "none";
+    document.getElementById("srs-container").innerHTML   = "";
+    document.getElementById("summary-srs").style.display = "none";
+    try {
+      const data = await fetchJSON("/api/sr-activity");
+      document.getElementById("stat-srs").textContent   = data.total_srs;
+      document.getElementById("badge-srs").textContent  = data.total_srs;
+      document.getElementById("summary-srs").style.display = activeTab === "srs" ? "" : "none";
+      document.getElementById("srs-loading").style.display = "none";
+      if (data.results.length === 0) {
+        document.getElementById("srs-empty").style.display = "";
+      } else {
+        document.getElementById("srs-container").innerHTML = data.results.map(renderSR).join("");
+      }
+    } catch (err) {
+      document.getElementById("srs-loading").style.display = "none";
+      document.getElementById("srs-error-msg").textContent = err.message;
+      document.getElementById("srs-error").style.display   = "";
+      document.getElementById("badge-srs").textContent = "!";
+    }
+  }
+
+  async function fetchJSON(url) {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`Server error ${resp.status}`);
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+
+  // ── Refresh all + countdown ────────────────────────────────────────────────
+
+  function refreshAll() {
+    const btn = document.getElementById("refresh-btn");
+    btn.classList.add("spinning");
+    document.getElementById("last-refreshed").textContent = "refreshing…";
+    Promise.all([loadEpics(), loadSRs()]).finally(() => {
+      btn.classList.remove("spinning");
+      document.getElementById("last-refreshed").textContent =
+        new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+      scheduleCountdown();
+    });
+    // Show the active tab's strip once loaded (handled inside each loader)
+    switchTab(activeTab);
+  }
+
+  function scheduleCountdown() {
+    if (countdownTimer) clearInterval(countdownTimer);
+    nextRefresh = Date.now() + REFRESH_INTERVAL_MS;
+    countdownTimer = setInterval(() => {
+      const secs = Math.round((nextRefresh - Date.now()) / 1000);
+      if (secs <= 0) {
+        clearInterval(countdownTimer);
+        refreshAll();
+      } else {
+        const h = Math.floor(secs / 3600);
+        const m = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        const label = h > 0 ? `${h}h ${String(m).padStart(2,"0")}m` : `${m}:${String(s).padStart(2,"0")}`;
+        document.getElementById("countdown").textContent = `(auto-refresh in ${label})`;
+      }
+    }, 1000);
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  refreshAll();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
