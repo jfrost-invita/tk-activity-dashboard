@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-06 10:48 UTC",
-  "since": "2026-06-05 10:48",
+  "generated_at": "2026-06-06 12:03 UTC",
+  "since": "2026-06-05 12:03",
   "window_hours": 24,
-  "total_srs": 18,
+  "total_srs": 17,
   "results": [
     {
       "key": "SR-11316",
@@ -405,23 +405,6 @@
           "dept": "FAS",
           "when": "Jun 05, 12:01 UTC",
           "preview": "Hey guys,  I’m checking with the devs to see what they can see on the backend if there something going on with the passwords.  -Bri"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11323",
-      "summary": "Lab Unable to Accept Kit Transfer: TX2500671",
-      "status": "Closed",
-      "priority": "3",
-      "reporter": "Anneliese Boyd",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11323",
-      "team_comments": [
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 08:21 UTC",
-          "preview": "Hello Anneliese, This script has been deployed to your Production Environment. Please let me know if we may close this request. Thanks, Bri"
         }
       ],
       "linked_tk": []

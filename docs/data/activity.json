@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-06 10:48 UTC",
-  "since": "2026-06-05 10:48",
+  "generated_at": "2026-06-06 12:03 UTC",
+  "since": "2026-06-05 12:03",
   "window_hours": 24,
   "total_tickets": 3,
   "total_epics": 1,
@@ -34,12 +34,6 @@
           "assignee": "Nicolas Gamache",
           "url": "https://invitahealth.atlassian.net/browse/TK-21456",
           "transitions": [
-            {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:47 UTC",
-              "when_iso": "2026-06-05T07:47:02.742000-04:00"
-            },
             {
               "from": "In Testing",
               "to": "Reopened",
