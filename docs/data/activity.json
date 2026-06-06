@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-06 05:45 UTC",
-  "since": "2026-06-05 05:45",
+  "generated_at": "2026-06-06 08:22 UTC",
+  "since": "2026-06-05 08:22",
   "window_hours": 24,
-  "total_tickets": 9,
+  "total_tickets": 8,
   "total_epics": 3,
   "epics": [
     {
@@ -191,22 +191,6 @@
               "to": "Ready for Acceptance",
               "when": "Jun 05, 10:45 UTC",
               "when_iso": "2026-06-05T10:45:47.734000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21459",
-          "summary": "Unexpected Kits - Uncollected MF-> LEA Wizards Information Message Missing",
-          "type": "Bug",
-          "status": "In Testing",
-          "assignee": "Benjamin Salzberg",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21459",
-          "transitions": [
-            {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:47 UTC",
-              "when_iso": "2026-06-05T07:47:50.435000-04:00"
             }
           ]
         }
