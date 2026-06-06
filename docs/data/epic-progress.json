@@ -1,1 +1,785 @@
-{"generated_at": null, "total_epics": 0, "epics": []}
+{
+  "generated_at": "2026-06-06 01:45 UTC",
+  "total_epics": 7,
+  "epics": [
+    {
+      "key": "TK-8757",
+      "name": "[MA] - SAK 2026 Enhancement - PD279",
+      "assignee": "David Darby",
+      "exec_date": "2026-04-10",
+      "url": "https://invitahealth.atlassian.net/browse/TK-8757",
+      "total": 241,
+      "done": 210,
+      "open": 31,
+      "pct": 87,
+      "pre_count": 109,
+      "post_count": 132,
+      "pre_by_type": [
+        {
+          "type": "Story",
+          "total": 9,
+          "done": 7,
+          "open": 2,
+          "pct": 78
+        },
+        {
+          "type": "Bug",
+          "total": 100,
+          "done": 90,
+          "open": 10,
+          "pct": 90
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Bug",
+          "total": 73,
+          "done": 56,
+          "open": 17,
+          "pct": 77
+        },
+        {
+          "type": "Story Bug",
+          "total": 59,
+          "done": 57,
+          "open": 2,
+          "pct": 97
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-21498",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "Adding user: Popup does not refresh when entering a new email ",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21498",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21532",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "LEA: Storage Location Validation message is displayed only when the 'Storage Location' is missing information",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21532",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21596",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "LEA/PC: Kit Transfer from LEA1 to LEA2 is still displayed when a kit is 'Undone' to before the transfer",
+          "assignee": "Diyaa Ebrahim",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21596",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21698",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "MF Missing Info Worklist | LEA Name Not Displaying after Kit is Received into Storage Portal",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21698",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21705",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "Survivor Notification: Not receiving the Status change for Tox kit ",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21705",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21707",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "PC: Dashboard: Prosecutor: Kits Awaiting LEA Pickup: 'Passed Pickup Due Date' Count includes all kits ",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21707",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21833",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "SR - When Lab Enters Cancel Lab Processing Date the Lab Receipt Date is cleared",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21833",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21674",
+          "type": "Story Bug",
+          "status": "In Progress",
+          "summary": "Lab: MF field is missing on wizard for a kit coming from Distributor",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21674",
+          "closed": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "key": "TK-9375",
+      "name": "[TX] 2026 Enhancement 2 - PD281",
+      "assignee": "Briana Spivey",
+      "exec_date": "2026-04-10",
+      "url": "https://invitahealth.atlassian.net/browse/TK-9375",
+      "total": 21,
+      "done": 1,
+      "open": 20,
+      "pct": 5,
+      "pre_count": 20,
+      "post_count": 1,
+      "pre_by_type": [
+        {
+          "type": "Story",
+          "total": 17,
+          "done": 0,
+          "open": 17,
+          "pct": 0
+        },
+        {
+          "type": "Bug",
+          "total": 3,
+          "done": 1,
+          "open": 2,
+          "pct": 33
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Story",
+          "total": 1,
+          "done": 0,
+          "open": 1,
+          "pct": 0
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-18147",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "Laboratory LIMS (Vendor: JusticeTrax) Integration with Track-Kit – Milestone 1",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-18147",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-18148",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "Create a New Notification to Policy Center for JusticeTrax Integration Error – SAK",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-18148",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-18149",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "Create New System Setting for JusticeTrax Integration – Import Start Date ",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-18149",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-18150",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "Create New System Setting for JusticeTrax Integration – Catch All LEA ",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-18150",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20562",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "Storage Portal: Field ‘Lab Case Number’ Addition to Kit Details and Receipt Wizard ",
+          "assignee": "Diyaa Ebrahim",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20562",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20563",
+          "type": "Story",
+          "status": "Developing",
+          "summary": "Storage Portal: LIMS Integration",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20563",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20564",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "Create New System Setting for JusticeTrax Integration – Catch All Medical Facility",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20564",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20722",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "LIMS Integration – Milestone 2",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20722",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20723",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "LIMS Integration – Milestone 3",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20723",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20724",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "LIMS Integration – Milestone 4",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20724",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20725",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "LIMS Integration – Milestone 1 Limited Consent",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20725",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20726",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "LIMS Integration – Milestone 2 Limited Consent",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20726",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20727",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "LIMS Integration – Milestone 3 Limited Consent",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20727",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20728",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "LIMS Integration – Technical Specification Document",
+          "assignee": "Olivier Diguer-St-Amant",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20728",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20729",
+          "type": "Story",
+          "status": "Developing",
+          "summary": "Migration Script - Import LEA Organization IDs ",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20729",
+          "closed": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "key": "TK-10277",
+      "name": "[FDLE] - SAK 2026 Enhancements - PD283",
+      "assignee": "David Darby",
+      "exec_date": "2026-02-09",
+      "url": "https://invitahealth.atlassian.net/browse/TK-10277",
+      "total": 188,
+      "done": 149,
+      "open": 39,
+      "pct": 79,
+      "pre_count": 83,
+      "post_count": 105,
+      "pre_by_type": [
+        {
+          "type": "Story",
+          "total": 6,
+          "done": 5,
+          "open": 1,
+          "pct": 83
+        },
+        {
+          "type": "Bug",
+          "total": 77,
+          "done": 73,
+          "open": 4,
+          "pct": 95
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Story",
+          "total": 1,
+          "done": 0,
+          "open": 1,
+          "pct": 0
+        },
+        {
+          "type": "Bug",
+          "total": 99,
+          "done": 67,
+          "open": 32,
+          "pct": 68
+        },
+        {
+          "type": "Story Bug",
+          "total": 5,
+          "done": 4,
+          "open": 1,
+          "pct": 80
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-21349",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "Survivor | Kits received unexpected downstream from the MF does not properly display upstream organizations on Survivor timeline",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21349",
+          "closed": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "key": "TK-11147",
+      "name": "[TX] 2026 Enhancement 1 - PD292",
+      "assignee": "Briana Spivey",
+      "exec_date": "2026-02-27",
+      "url": "https://invitahealth.atlassian.net/browse/TK-11147",
+      "total": 125,
+      "done": 51,
+      "open": 74,
+      "pct": 41,
+      "pre_count": 28,
+      "post_count": 97,
+      "pre_by_type": [
+        {
+          "type": "Story",
+          "total": 6,
+          "done": 0,
+          "open": 6,
+          "pct": 0
+        },
+        {
+          "type": "Bug",
+          "total": 22,
+          "done": 8,
+          "open": 14,
+          "pct": 36
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Story",
+          "total": 2,
+          "done": 0,
+          "open": 2,
+          "pct": 0
+        },
+        {
+          "type": "Bug",
+          "total": 86,
+          "done": 41,
+          "open": 45,
+          "pct": 48
+        },
+        {
+          "type": "Story Bug",
+          "total": 9,
+          "done": 2,
+          "open": 7,
+          "pct": 22
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-18605",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "SR | Technical Support - LEA User Unable to Load Kits from Home Screen",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-18605",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20568",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "SR - Defect: Storage Portal Able to Receive Limited Consent Kits",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20568",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20571",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "SR - Storage Portal: Shouldn't Require Lab When Kit Converts",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20571",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20666",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "SR - New Users Aren't Receiving Automated Email to Login & Setup Password",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20666",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20694",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "SR - Unable to Add LEA User from PC or LEA",
+          "assignee": "Diyaa Ebrahim",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20694",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21174",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "SR - PC/Administrator is unable to reactivate user",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21174",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21459",
+          "type": "Bug",
+          "status": "In Testing",
+          "summary": "Unexpected Kits - Uncollected MF-> LEA Wizards Information Message Missing",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21459",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21537",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "LEA Case Number cleared when creating a kit at the LAB",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21537",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21644",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "PC: Portal Users = Error when updating users.",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21644",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21697",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "Systemwide: Kit Pickup wizard does not enforce case numbers for Lab/LEA",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21697",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21713",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "MF: Error when a kit status is changed from \"Full consent \" to \"Limited Consent\"",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21713",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21723",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "Wrong Kit Inventory Transfer Message ",
+          "assignee": "Kevin Touch",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21723",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21786",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "Lab: Error is thrown when scanning an uncollected kit",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21786",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21834",
+          "type": "Bug",
+          "status": "Ready for Testing",
+          "summary": "Systemwide: Error 500 when logging into TX from Edge Web Browser",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21834",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-13820",
+          "type": "Story",
+          "status": "Ready for Code Review",
+          "summary": "Kit Outsourcing Lab Status Corrections ",
+          "assignee": "Benjamin Salzberg",
+          "url": "https://invitahealth.atlassian.net/browse/TK-13820",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-20679",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "Ability for Laboratory to Batch Transfer Kits",
+          "assignee": "Diyaa Ebrahim",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20679",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21788",
+          "type": "Story Bug",
+          "status": "Ready for Testing",
+          "summary": "Lab: Password field missing when adding a portal site user in lab",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21788",
+          "closed": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "key": "TK-18033",
+      "name": "[MD] - HIT Implementation - PD307 ",
+      "assignee": "Briana Spivey",
+      "exec_date": "2025-03-27",
+      "url": "https://invitahealth.atlassian.net/browse/TK-18033",
+      "total": 151,
+      "done": 147,
+      "open": 4,
+      "pct": 97,
+      "pre_count": 1,
+      "post_count": 150,
+      "pre_by_type": [
+        {
+          "type": "Story",
+          "total": 1,
+          "done": 1,
+          "open": 0,
+          "pct": 100
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Story",
+          "total": 14,
+          "done": 11,
+          "open": 3,
+          "pct": 79
+        },
+        {
+          "type": "Bug",
+          "total": 123,
+          "done": 122,
+          "open": 1,
+          "pct": 99
+        },
+        {
+          "type": "Story Bug",
+          "total": 13,
+          "done": 13,
+          "open": 0,
+          "pct": 100
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-19579",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "Provide access to a \"reporting\" SQL Server which would host a copy of the production database for MD-HT",
+          "assignee": "Evelyn Armstrong",
+          "url": "https://invitahealth.atlassian.net/browse/TK-19579",
+          "closed": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "key": "TK-20074",
+      "name": "[PCCD] - SAK Implementation - PD327",
+      "assignee": "Kevin Smith",
+      "exec_date": "2026-05-19",
+      "url": "https://invitahealth.atlassian.net/browse/TK-20074",
+      "total": 29,
+      "done": 20,
+      "open": 9,
+      "pct": 69,
+      "pre_count": 21,
+      "post_count": 8,
+      "pre_by_type": [
+        {
+          "type": "Story",
+          "total": 4,
+          "done": 3,
+          "open": 1,
+          "pct": 75
+        },
+        {
+          "type": "Bug",
+          "total": 17,
+          "done": 16,
+          "open": 1,
+          "pct": 94
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Story",
+          "total": 2,
+          "done": 0,
+          "open": 2,
+          "pct": 0
+        },
+        {
+          "type": "Bug",
+          "total": 6,
+          "done": 1,
+          "open": 5,
+          "pct": 17
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-20587",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "Cloud admin - Create and Configure PROD Environment for PCCD",
+          "assignee": "Evelyn Armstrong",
+          "url": "https://invitahealth.atlassian.net/browse/TK-20587",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21734",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "Cloud Admin | Update Client Test environment to Validation Build",
+          "assignee": "Evelyn Armstrong",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21734",
+          "closed": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "key": "TK-21334",
+      "name": "[AK] SAK Re-Release",
+      "assignee": "David Darby",
+      "exec_date": "2026-04-28",
+      "url": "https://invitahealth.atlassian.net/browse/TK-21334",
+      "total": 5,
+      "done": 3,
+      "open": 2,
+      "pct": 60,
+      "pre_count": 2,
+      "post_count": 3,
+      "pre_by_type": [
+        {
+          "type": "Bug",
+          "total": 2,
+          "done": 2,
+          "open": 0,
+          "pct": 100
+        }
+      ],
+      "post_by_type": [
+        {
+          "type": "Story",
+          "total": 2,
+          "done": 0,
+          "open": 2,
+          "pct": 0
+        },
+        {
+          "type": "Bug",
+          "total": 1,
+          "done": 1,
+          "open": 0,
+          "pct": 100
+        }
+      ],
+      "in_progress": [
+        {
+          "key": "TK-21736",
+          "type": "Story",
+          "status": "Ready for Testing",
+          "summary": "Deploy Build 4.3.10.16258 to Client Test Environment on 04.June.2026",
+          "assignee": "Evelyn Armstrong",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21736",
+          "closed": false,
+          "active": true
+        }
+      ]
+    }
+  ]
+}
