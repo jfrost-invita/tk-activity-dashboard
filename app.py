@@ -58,6 +58,23 @@ ACTIVE_STATUSES = {
 # Shared helpers
 # ---------------------------------------------------------------------------
 
+def _business_since(window_hours: int = WINDOW_HOURS) -> tuple:
+    """
+    Return (since, now) with weekend awareness.
+    If looking back window_hours lands on a Saturday or Sunday, walk
+    back to the same time on Friday so Monday morning shows Friday's work.
+      weekday(): 0=Mon 1=Tue 2=Wed 3=Thu 4=Fri 5=Sat 6=Sun
+    """
+    now   = datetime.now(timezone.utc)
+    since = now - timedelta(hours=window_hours)
+    dow   = since.weekday()
+    if dow == 5:    # landed on Saturday → back one day to Friday
+        since -= timedelta(days=1)
+    elif dow == 6:  # landed on Sunday  → back two days to Friday
+        since -= timedelta(days=2)
+    return since, now
+
+
 def adf_to_plaintext(node) -> str:
     """Recursively extract plain text from an Atlassian Document Format node."""
     if not node:
@@ -98,12 +115,12 @@ def _empty_sr_response(now: datetime, window_hours: int) -> dict:
 # ---------------------------------------------------------------------------
 
 def fetch_activity(window_hours: int = WINDOW_HOURS) -> dict:
-    """TK tickets with status changes in last N hours under Executing epics."""
+    """TK tickets with status changes in last N business hours under Executing epics."""
     jira       = JiraClient()
     classifier = UserRoleClassifier(jira)
 
-    now   = datetime.now(timezone.utc)
-    since = now - timedelta(hours=window_hours)
+    since, now = _business_since(window_hours)
+    since_str  = since.strftime("%Y-%m-%d %H:%M")
 
     # ── 1. All Executing TK epics ──────────────────────────────────────────
     epics_raw = jira.search_jql(
@@ -124,7 +141,7 @@ def fetch_activity(window_hours: int = WINDOW_HOURS) -> dict:
         f'project=TK '
         f'AND parentEpic in ({epic_clause}) '
         f'AND issuetype in ("{type_clause}") '
-        f'AND status changed DURING (-{window_hours}h, now()) '
+        f'AND status changed DURING ("{since_str}", now()) '
         f'ORDER BY updated DESC'
     )
     issues = jira.search_jql(
@@ -202,6 +219,7 @@ def fetch_activity(window_hours: int = WINDOW_HOURS) -> dict:
 
     return {
         "generated_at":  now.strftime("%Y-%m-%d %H:%M UTC"),
+        "since":         since_str,
         "window_hours":  window_hours,
         "total_tickets": sum(len(e["tickets"]) for e in result_epics),
         "total_epics":   len(result_epics),
@@ -222,12 +240,12 @@ def fetch_sr_activity(window_hours: int = WINDOW_HOURS) -> dict:
     jira       = JiraClient()
     classifier = UserRoleClassifier(jira)
 
-    now   = datetime.now(timezone.utc)
-    since = now - timedelta(hours=window_hours)
+    since, now = _business_since(window_hours)
+    since_str  = since.strftime("%Y-%m-%d %H:%M")
 
     # ── 1. SR tickets updated in the window ───────────────────────────────
     sr_issues = jira.search_jql(
-        f'project=SR AND updated >= -{window_hours}h ORDER BY updated DESC',
+        f'project=SR AND updated >= "{since_str}" ORDER BY updated DESC',
         ["summary", "status", "priority", "reporter", "assignee", "comment", "issuelinks"],
     )
 
@@ -248,7 +266,7 @@ def fetch_sr_activity(window_hours: int = WINDOW_HOURS) -> dict:
     if tk_keys:
         tk_csv    = ", ".join(tk_keys)
         tk_issues = jira.search_jql(
-            f'issuekey in ({tk_csv}) AND updated >= -{window_hours}h',
+            f'issuekey in ({tk_csv}) AND updated >= "{since_str}"',
             ["summary", "status", "assignee", "issuetype"],
         )
         for tk in tk_issues:
@@ -322,6 +340,7 @@ def fetch_sr_activity(window_hours: int = WINDOW_HOURS) -> dict:
 
     return {
         "generated_at": now.strftime("%Y-%m-%d %H:%M UTC"),
+        "since":        since_str,
         "window_hours": window_hours,
         "total_srs":    len(results),
         "results":      results,

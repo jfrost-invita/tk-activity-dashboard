@@ -202,11 +202,11 @@
 <div class="summary-strip" id="summary-epics" style="display:none">
   <div class="stat"><span class="num" id="stat-tickets">0</span><span>tickets moved</span></div>
   <div class="stat"><span class="num" id="stat-epics">0</span><span>active epics</span></div>
-  <span class="window-badge"><i class="bi bi-clock me-1"></i>Last 24 hours</span>
+  <span class="window-badge"><i class="bi bi-clock me-1"></i><span class="since-label">Last 24 hours</span></span>
 </div>
 <div class="summary-strip" id="summary-srs" style="display:none">
   <div class="stat"><span class="num" id="stat-srs">0</span><span>customer SRs with team activity</span></div>
-  <span class="window-badge"><i class="bi bi-clock me-1"></i>Last 24 hours</span>
+  <span class="window-badge"><i class="bi bi-clock me-1"></i><span class="since-label">Last 24 hours</span></span>
 </div>
 <div class="summary-strip" id="summary-progress" style="display:none">
   <div class="stat"><span class="num" id="stat-ep-epics">0</span><span>executing epics</span></div>
@@ -486,6 +486,14 @@
     if (ts) document.getElementById("data-timestamp").textContent = ts;
   }
 
+  function updateSinceLabel(sinceStr) {
+    if (!sinceStr) return;
+    const d = new Date(sinceStr.replace(" ", "T") + "Z");
+    const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    const label = `Since ${days[d.getUTCDay()]} ${d.toLocaleString("en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC",hour12:false})} UTC`;
+    document.querySelectorAll(".since-label").forEach(el => el.textContent = label);
+  }
+
   async function loadEpics() {
     document.getElementById("epics-loading").style.display = "";
     document.getElementById("epics-error").style.display   = "none";
@@ -499,6 +507,7 @@
       document.getElementById("stat-epics").textContent   = data.total_epics;
       document.getElementById("badge-epics").textContent  = data.total_tickets;
       updateTimestamp(data.generated_at);
+      updateSinceLabel(data.since);
       strip.dataset.ready = "1";
       if (activeTab === "epics") strip.style.display = "";
       document.getElementById("epics-loading").style.display = "none";
@@ -525,6 +534,7 @@
       document.getElementById("stat-srs").textContent  = data.total_srs;
       document.getElementById("badge-srs").textContent = data.total_srs;
       updateTimestamp(data.generated_at);
+      updateSinceLabel(data.since);
       strip.dataset.ready = "1";
       if (activeTab === "srs") strip.style.display = "";
       document.getElementById("srs-loading").style.display = "none";
