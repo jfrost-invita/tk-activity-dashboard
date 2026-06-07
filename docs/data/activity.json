@@ -1,67 +1,10 @@
 {
-  "generated_at": "2026-06-07 09:57 UTC",
-  "since": "2026-06-05 09:57",
+  "generated_at": "2026-06-07 11:44 UTC",
+  "since": "2026-06-05 11:44",
   "window_hours": 24,
-  "total_tickets": 6,
-  "total_epics": 2,
+  "total_tickets": 3,
+  "total_epics": 1,
   "epics": [
-    {
-      "key": "TK-8757",
-      "name": "[MA] - SAK 2026 Enhancement - PD279",
-      "url": "https://invitahealth.atlassian.net/browse/TK-8757",
-      "tickets": [
-        {
-          "key": "TK-21705",
-          "summary": "Survivor Notification: Not receiving the Status change for Tox kit ",
-          "type": "Bug",
-          "status": "In Progress",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21705",
-          "transitions": [
-            {
-              "from": "In Code Review",
-              "to": "Dev Approved",
-              "when": "Jun 05, 10:40 UTC",
-              "when_iso": "2026-06-05T10:40:56.302000-04:00"
-            },
-            {
-              "from": "Dev Approved",
-              "to": "Ready for Testing",
-              "when": "Jun 05, 10:40 UTC",
-              "when_iso": "2026-06-05T10:40:58.143000-04:00"
-            },
-            {
-              "from": "Ready for Testing",
-              "to": "Blocked (PM)",
-              "when": "Jun 05, 10:41 UTC",
-              "when_iso": "2026-06-05T10:41:01.124000-04:00"
-            },
-            {
-              "from": "Blocked (PM)",
-              "to": "In Progress",
-              "when": "Jun 05, 10:41 UTC",
-              "when_iso": "2026-06-05T10:41:02.937000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21833",
-          "summary": "SR - When Lab Enters Cancel Lab Processing Date the Lab Receipt Date is cleared",
-          "type": "Bug",
-          "status": "In Progress",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21833",
-          "transitions": [
-            {
-              "from": "Not Started",
-              "to": "In Progress",
-              "when": "Jun 05, 10:29 UTC",
-              "when_iso": "2026-06-05T10:29:04.771000-04:00"
-            }
-          ]
-        }
-      ]
-    },
     {
       "key": "TK-11147",
       "name": "[TX] 2026 Enhancement 1 - PD292",
@@ -118,28 +61,6 @@
               "to": "In Code Review",
               "when": "Jun 05, 12:29 UTC",
               "when_iso": "2026-06-05T12:29:28.730000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21593",
-          "summary": "Organization Name Selector Page | Clicking on 'Home' takes user to HTTP ERROR 404 page",
-          "type": "Bug",
-          "status": "Ready for Acceptance",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21593",
-          "transitions": [
-            {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:48 UTC",
-              "when_iso": "2026-06-05T07:48:11.286000-04:00"
-            },
-            {
-              "from": "In Testing",
-              "to": "Ready for Acceptance",
-              "when": "Jun 05, 10:45 UTC",
-              "when_iso": "2026-06-05T10:45:47.734000-04:00"
             }
           ]
         }
