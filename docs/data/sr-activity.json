@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-07 06:57 UTC",
-  "since": "2026-06-05 06:57",
+  "generated_at": "2026-06-07 09:57 UTC",
+  "since": "2026-06-05 09:57",
   "window_hours": 24,
   "total_srs": 18,
   "results": [
@@ -19,26 +19,7 @@
           "preview": "Updated CT QA environment to 4.2.5.5593. Contains fix for the setting anonymous field on kit"
         }
       ],
-      "linked_tk": [
-        {
-          "key": "TK-21694",
-          "summary": "SR - Anonymous Kits cannot be edited properly in PC",
-          "status": "Ready for Testing",
-          "type": "Data Correction",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21694"
-        },
-        {
-          "key": "TK-21835",
-          "summary": "SR - Anonymous Kits cannot be edited properly in PC",
-          "status": "Ready for Testing",
-          "type": "Bug",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21835"
-        }
-      ]
+      "linked_tk": []
     },
     {
       "key": "SR-11373",
