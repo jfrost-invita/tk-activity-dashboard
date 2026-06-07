@@ -1,32 +1,8 @@
 {
-  "generated_at": "2026-06-07 15:17 UTC",
-  "since": "2026-06-05 15:17",
+  "generated_at": "2026-06-07 17:03 UTC",
+  "since": "2026-06-05 17:03",
   "window_hours": 24,
-  "total_tickets": 1,
-  "total_epics": 1,
-  "epics": [
-    {
-      "key": "TK-11147",
-      "name": "[TX] 2026 Enhancement 1 - PD292",
-      "url": "https://invitahealth.atlassian.net/browse/TK-11147",
-      "tickets": [
-        {
-          "key": "TK-21787",
-          "summary": "Systemwide: Error when an Admin creates a user with multi-site  access",
-          "type": "Story Bug",
-          "status": "In Code Review",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21787",
-          "transitions": [
-            {
-              "from": "In Progress",
-              "to": "In Code Review",
-              "when": "Jun 05, 15:23 UTC",
-              "when_iso": "2026-06-05T15:23:58.341000-04:00"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "total_tickets": 0,
+  "total_epics": 0,
+  "epics": []
 }

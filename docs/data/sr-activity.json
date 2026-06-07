@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-07 15:17 UTC",
-  "since": "2026-06-05 15:17",
+  "generated_at": "2026-06-07 17:03 UTC",
+  "since": "2026-06-05 17:03",
   "window_hours": 24,
-  "total_srs": 7,
+  "total_srs": 5,
   "results": [
     {
       "key": "SR-11373",
@@ -112,40 +112,6 @@
           "url": "https://invitahealth.atlassian.net/browse/TK-21784"
         }
       ]
-    },
-    {
-      "key": "SR-11386",
-      "summary": "Sample Profiles Not Importing into Analysis",
-      "status": "In Queue",
-      "priority": "2",
-      "reporter": "Jeff Hahn",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11386",
-      "team_comments": [
-        {
-          "author": "Mariela Rivera",
-          "dept": "FAS",
-          "when": "Jun 05, 13:20 UTC",
-          "preview": "It looks like they need help walking back samples that were lost during a server hitting max storage.  Could someone on the technical side help get their data b…"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11311",
-      "summary": "STACS server upgrade",
-      "status": "In Queue",
-      "priority": "2",
-      "reporter": "Rakhi Gupta",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11311",
-      "team_comments": [
-        {
-          "author": "Michelle Bonnette",
-          "dept": "FAS",
-          "when": "Jun 05, 12:04 UTC",
-          "preview": "Adding in email received from client for documentation:   HI Michelle,   Yes, I did receive ticket SR-11311, haven’t received any update on it though. Can you p…"
-        }
-      ],
-      "linked_tk": []
     }
   ]
 }
