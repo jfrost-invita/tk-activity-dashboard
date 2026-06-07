@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-07 13:17 UTC",
-  "since": "2026-06-05 13:17",
+  "generated_at": "2026-06-07 15:17 UTC",
+  "since": "2026-06-05 15:17",
   "window_hours": 24,
-  "total_srs": 10,
+  "total_srs": 7,
   "results": [
     {
       "key": "SR-11373",
@@ -31,17 +31,7 @@
           "preview": "Requested permission from client to deploy the script, noted deployment next week.  Thank you."
         }
       ],
-      "linked_tk": [
-        {
-          "key": "TK-21777",
-          "summary": "SR - MI25-4624 reverted back ",
-          "status": "Dev Approved",
-          "type": "Data Correction",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21777"
-        }
-      ]
+      "linked_tk": []
     },
     {
       "key": "SR-11389",
@@ -153,79 +143,6 @@
           "dept": "FAS",
           "when": "Jun 05, 12:04 UTC",
           "preview": "Adding in email received from client for documentation:   HI Michelle,   Yes, I did receive ticket SR-11311, haven’t received any update on it though. Can you p…"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11378",
-      "summary": "Date Errors",
-      "status": "Waiting on Customer",
-      "priority": "4",
-      "reporter": "rmansi@dps.state.nv.us",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11378",
-      "team_comments": [
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 13:42 UTC",
-          "preview": "Hello Raymond.  It appears this is an older kit in the system when the date validation was probably not in place. Now we have a date validation that the LEA Inv…"
-        },
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 13:57 UTC",
-          "preview": "The Policy Center can update the dates so the validation message goes away and the lab can enter their information. The PC can make the dates the same (4/16/202…"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11308",
-      "summary": "Kit was outsourced, but LEA forgot to enter it in Track Kit and would like to correct date added to the kit details",
-      "status": "Ready for FAS Review",
-      "priority": "3",
-      "reporter": "Tracy Majors",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11308",
-      "team_comments": [
-        {
-          "author": "Evelyn Armstrong",
-          "dept": "Software Engineering",
-          "when": "Jun 05, 13:45 UTC",
-          "preview": "New script is ready! We won’t be able to run it until early next week though due to internal policy."
-        }
-      ],
-      "linked_tk": [
-        {
-          "key": "TK-21609",
-          "summary": "SR - Kit was outsourced, but LEA forgot to enter it in Track Kit and would like to correct date added to the kit details",
-          "status": "Dev Approved",
-          "type": "Data Correction",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21609"
-        }
-      ]
-    },
-    {
-      "key": "SR-11385",
-      "summary": "Distributor shipped Kit range IA25-1476 to IA25-1500 for training",
-      "status": "In Queue",
-      "priority": "3",
-      "reporter": "David Darby",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11385",
-      "team_comments": [
-        {
-          "author": "David Darby",
-          "dept": "FAS",
-          "when": "Jun 05, 11:40 UTC",
-          "preview": "The kit range IA25-1476 to IA25-1500 was shipped earlier in January 2026 prior to the v4.4 upgrade to a test medical facility. The audit history indicates the k…"
-        },
-        {
-          "author": "David Darby",
-          "dept": "FAS",
-          "when": "Jun 05, 11:41 UTC",
-          "preview": "Hi Natalie,  Following up from our meeting earlier, I created this SR to investigate where the kit lot range IA25-1476 to IA25-1500 was sent to. I’ll let you kn…"
         }
       ],
       "linked_tk": []
