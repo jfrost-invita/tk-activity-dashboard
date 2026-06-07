@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-07 11:44 UTC",
-  "since": "2026-06-05 11:44",
+  "generated_at": "2026-06-07 13:17 UTC",
+  "since": "2026-06-05 13:17",
   "window_hours": 24,
-  "total_tickets": 3,
+  "total_tickets": 2,
   "total_epics": 1,
   "epics": [
     {
@@ -35,32 +35,10 @@
           "url": "https://invitahealth.atlassian.net/browse/TK-21456",
           "transitions": [
             {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:47 UTC",
-              "when_iso": "2026-06-05T07:47:02.742000-04:00"
-            },
-            {
               "from": "In Testing",
               "to": "Reopened",
               "when": "Jun 05, 14:14 UTC",
               "when_iso": "2026-06-05T14:14:37.780000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21837",
-          "summary": "LAB | Receive Kit Wizard | Report To Law Enforcement and Medical Facility fields are missing",
-          "type": "Bug",
-          "status": "In Code Review",
-          "assignee": "Nicolas Gamache",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21837",
-          "transitions": [
-            {
-              "from": "In Progress",
-              "to": "In Code Review",
-              "when": "Jun 05, 12:29 UTC",
-              "when_iso": "2026-06-05T12:29:28.730000-04:00"
             }
           ]
         }
