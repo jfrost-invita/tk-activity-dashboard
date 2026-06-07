@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-07 02:29 UTC",
-  "since": "2026-06-05 02:29",
+  "generated_at": "2026-06-07 06:57 UTC",
+  "since": "2026-06-05 06:57",
   "window_hours": 24,
-  "total_tickets": 10,
+  "total_tickets": 9,
   "total_epics": 3,
   "epics": [
     {
@@ -207,22 +207,6 @@
               "to": "In Testing",
               "when": "Jun 05, 07:47 UTC",
               "when_iso": "2026-06-05T07:47:50.435000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-20694",
-          "summary": "SR - Unable to Add LEA User from PC or LEA",
-          "type": "Bug",
-          "status": "In Progress",
-          "assignee": "Diyaa Ebrahim",
-          "url": "https://invitahealth.atlassian.net/browse/TK-20694",
-          "transitions": [
-            {
-              "from": "Not Started",
-              "to": "In Progress",
-              "when": "Jun 05, 04:20 UTC",
-              "when_iso": "2026-06-05T04:20:44.093000-04:00"
             }
           ]
         }
