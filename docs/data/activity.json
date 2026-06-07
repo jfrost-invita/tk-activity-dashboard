@@ -1,8 +1,32 @@
 {
-  "generated_at": "2026-06-07 17:03 UTC",
-  "since": "2026-06-05 17:03",
+  "generated_at": "2026-06-07 19:04 UTC",
+  "since": "2026-06-05 19:04",
   "window_hours": 24,
-  "total_tickets": 0,
-  "total_epics": 0,
-  "epics": []
+  "total_tickets": 1,
+  "total_epics": 1,
+  "epics": [
+    {
+      "key": "TK-11147",
+      "name": "[TX] 2026 Enhancement 1 - PD292",
+      "url": "https://invitahealth.atlassian.net/browse/TK-11147",
+      "tickets": [
+        {
+          "key": "TK-21615",
+          "summary": "MF selects Report to LEA = yes, then Consent for testing locks to yes",
+          "type": "Bug",
+          "status": "In Progress",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21615",
+          "transitions": [
+            {
+              "from": "Not Started",
+              "to": "In Progress",
+              "when": "Jun 07, 13:23 UTC",
+              "when_iso": "2026-06-07T13:23:14.058000-04:00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

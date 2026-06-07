@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-07 17:03 UTC",
+  "generated_at": "2026-06-07 19:04 UTC",
   "total_epics": 7,
   "epics": [
     {
@@ -512,6 +512,16 @@
           "summary": "LEA Case Number cleared when creating a kit at the LAB",
           "assignee": "Nicolas Gamache",
           "url": "https://invitahealth.atlassian.net/browse/TK-21537",
+          "closed": false,
+          "active": true
+        },
+        {
+          "key": "TK-21615",
+          "type": "Bug",
+          "status": "In Progress",
+          "summary": "MF selects Report to LEA = yes, then Consent for testing locks to yes",
+          "assignee": "Nicolas Gamache",
+          "url": "https://invitahealth.atlassian.net/browse/TK-21615",
           "closed": false,
           "active": true
         },
