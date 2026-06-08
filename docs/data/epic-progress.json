@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08 07:25 UTC",
+  "generated_at": "2026-06-08 12:20 UTC",
   "total_epics": 7,
   "epics": [
     {
@@ -518,7 +518,7 @@
         {
           "key": "TK-21615",
           "type": "Bug",
-          "status": "In Progress",
+          "status": "Ready for Testing",
           "summary": "MF selects Report to LEA = yes, then Consent for testing locks to yes",
           "assignee": "Nicolas Gamache",
           "url": "https://invitahealth.atlassian.net/browse/TK-21615",

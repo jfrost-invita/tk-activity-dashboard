@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-08 07:25 UTC",
-  "since": "2026-06-05 07:25",
+  "generated_at": "2026-06-08 12:20 UTC",
+  "since": "2026-06-05 12:20",
   "window_hours": 24,
-  "total_srs": 18,
+  "total_srs": 15,
   "results": [
     {
       "key": "SR-11316",
@@ -19,26 +19,7 @@
           "preview": "Updated CT QA environment to 4.2.5.5593. Contains fix for the setting anonymous field on kit"
         }
       ],
-      "linked_tk": [
-        {
-          "key": "TK-21694",
-          "summary": "SR - Anonymous Kits cannot be edited properly in PC",
-          "status": "Ready for Testing",
-          "type": "Data Correction",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21694"
-        },
-        {
-          "key": "TK-21835",
-          "summary": "SR - Anonymous Kits cannot be edited properly in PC",
-          "status": "Ready for Testing",
-          "type": "Bug",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21835"
-        }
-      ]
+      "linked_tk": []
     },
     {
       "key": "SR-11373",
@@ -350,15 +331,6 @@
           "assignee": "Kevin Touch",
           "dept": "Software Engineering",
           "url": "https://invitahealth.atlassian.net/browse/TK-21832"
-        },
-        {
-          "key": "TK-21833",
-          "summary": "SR - When Lab Enters Cancel Lab Processing Date the Lab Receipt Date is cleared",
-          "status": "In Progress",
-          "type": "Bug",
-          "assignee": "Kevin Touch",
-          "dept": "Software Engineering",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21833"
         }
       ]
     },
@@ -375,81 +347,6 @@
           "dept": "FAS",
           "when": "Jun 05, 12:48 UTC",
           "preview": "Hi Erin,  I’ve logged a bug for this and will make sure its fixed in the next build."
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11376",
-      "summary": "Unable to Re-Activate User",
-      "status": "Closed",
-      "priority": "3",
-      "reporter": "Anneliese Boyd",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11376",
-      "team_comments": [
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 08:24 UTC",
-          "preview": "Apologies are we able to run this script again this morning? I didn’t see it last night and therefore the user was not able to log in and is disabled again. Th…"
-        },
-        {
-          "author": "Kevin Touch",
-          "dept": "Software Engineering",
-          "when": "Jun 05, 08:42 UTC",
-          "preview": "Good morning! I have ran the script again even though it’s Friday. Can you connect with the client again? Thank you."
-        },
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 08:44 UTC",
-          "preview": "thank you Kevin I really appreciate it!!"
-        },
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 08:44 UTC",
-          "preview": "Hello Anneliese, This script has been deployed to your Production Environment. Please advise end user to log in by the end of the day. Please let me know if we…"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11381",
-      "summary": "Survivor Password Issue",
-      "status": "In Queue",
-      "priority": "4",
-      "reporter": "Rebecca Vieh",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11381",
-      "team_comments": [
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 12:00 UTC",
-          "preview": "Devs are you able to look and see if there’s something weird with the passwords that were associated with the kit? I’m assuming the other two kits were in the s…"
-        },
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 12:01 UTC",
-          "preview": "Hey guys,  I’m checking with the devs to see what they can see on the backend if there something going on with the passwords.  -Bri"
-        }
-      ],
-      "linked_tk": []
-    },
-    {
-      "key": "SR-11323",
-      "summary": "Lab Unable to Accept Kit Transfer: TX2500671",
-      "status": "Closed",
-      "priority": "3",
-      "reporter": "Anneliese Boyd",
-      "url": "https://invitahealth.atlassian.net/browse/SR-11323",
-      "team_comments": [
-        {
-          "author": "Briana Spivey",
-          "dept": "FAS",
-          "when": "Jun 05, 08:21 UTC",
-          "preview": "Hello Anneliese, This script has been deployed to your Production Environment. Please let me know if we may close this request. Thanks, Bri"
         }
       ],
       "linked_tk": []

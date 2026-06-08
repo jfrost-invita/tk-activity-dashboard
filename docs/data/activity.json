@@ -1,118 +1,10 @@
 {
-  "generated_at": "2026-06-08 07:25 UTC",
-  "since": "2026-06-05 07:25",
+  "generated_at": "2026-06-08 12:20 UTC",
+  "since": "2026-06-05 12:20",
   "window_hours": 24,
-  "total_tickets": 10,
-  "total_epics": 3,
+  "total_tickets": 4,
+  "total_epics": 1,
   "epics": [
-    {
-      "key": "TK-8757",
-      "name": "[MA] - SAK 2026 Enhancement - PD279",
-      "url": "https://invitahealth.atlassian.net/browse/TK-8757",
-      "tickets": [
-        {
-          "key": "TK-21705",
-          "summary": "Survivor Notification: Not receiving the Status change for Tox kit ",
-          "type": "Bug",
-          "status": "In Progress",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21705",
-          "transitions": [
-            {
-              "from": "In Code Review",
-              "to": "Dev Approved",
-              "when": "Jun 05, 10:40 UTC",
-              "when_iso": "2026-06-05T10:40:56.302000-04:00"
-            },
-            {
-              "from": "Dev Approved",
-              "to": "Ready for Testing",
-              "when": "Jun 05, 10:40 UTC",
-              "when_iso": "2026-06-05T10:40:58.143000-04:00"
-            },
-            {
-              "from": "Ready for Testing",
-              "to": "Blocked (PM)",
-              "when": "Jun 05, 10:41 UTC",
-              "when_iso": "2026-06-05T10:41:01.124000-04:00"
-            },
-            {
-              "from": "Blocked (PM)",
-              "to": "In Progress",
-              "when": "Jun 05, 10:41 UTC",
-              "when_iso": "2026-06-05T10:41:02.937000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21833",
-          "summary": "SR - When Lab Enters Cancel Lab Processing Date the Lab Receipt Date is cleared",
-          "type": "Bug",
-          "status": "In Progress",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21833",
-          "transitions": [
-            {
-              "from": "Not Started",
-              "to": "In Progress",
-              "when": "Jun 05, 10:29 UTC",
-              "when_iso": "2026-06-05T10:29:04.771000-04:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "key": "TK-9375",
-      "name": "[TX] 2026 Enhancement 2 - PD281",
-      "url": "https://invitahealth.atlassian.net/browse/TK-9375",
-      "tickets": [
-        {
-          "key": "TK-20562",
-          "summary": "Storage Portal: Field ‘Lab Case Number’ Addition to Kit Details and Receipt Wizard ",
-          "type": "Story",
-          "status": "Ready for Testing",
-          "assignee": "Diyaa Ebrahim",
-          "url": "https://invitahealth.atlassian.net/browse/TK-20562",
-          "transitions": [
-            {
-              "from": "Ready for Code Review",
-              "to": "In Code Review",
-              "when": "Jun 05, 09:31 UTC",
-              "when_iso": "2026-06-05T09:31:07.066000-04:00"
-            },
-            {
-              "from": "In Code Review",
-              "to": "Dev Approved",
-              "when": "Jun 05, 09:31 UTC",
-              "when_iso": "2026-06-05T09:31:16.244000-04:00"
-            },
-            {
-              "from": "Dev Approved",
-              "to": "Ready for Testing",
-              "when": "Jun 05, 09:39 UTC",
-              "when_iso": "2026-06-05T09:39:39.311000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-20563",
-          "summary": "Storage Portal: LIMS Integration",
-          "type": "Story",
-          "status": "Developing",
-          "assignee": "Benjamin Salzberg",
-          "url": "https://invitahealth.atlassian.net/browse/TK-20563",
-          "transitions": [
-            {
-              "from": "Ready for Development",
-              "to": "Developing",
-              "when": "Jun 05, 09:08 UTC",
-              "when_iso": "2026-06-05T09:08:16.086000-04:00"
-            }
-          ]
-        }
-      ]
-    },
     {
       "key": "TK-11147",
       "name": "[TX] 2026 Enhancement 1 - PD292",
@@ -159,12 +51,6 @@
           "url": "https://invitahealth.atlassian.net/browse/TK-21456",
           "transitions": [
             {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:47 UTC",
-              "when_iso": "2026-06-05T07:47:02.742000-04:00"
-            },
-            {
               "from": "In Testing",
               "to": "Reopened",
               "when": "Jun 05, 14:14 UTC",
@@ -185,44 +71,6 @@
               "to": "In Code Review",
               "when": "Jun 05, 12:29 UTC",
               "when_iso": "2026-06-05T12:29:28.730000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21593",
-          "summary": "Organization Name Selector Page | Clicking on 'Home' takes user to HTTP ERROR 404 page",
-          "type": "Bug",
-          "status": "Ready for Acceptance",
-          "assignee": "Kevin Touch",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21593",
-          "transitions": [
-            {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:48 UTC",
-              "when_iso": "2026-06-05T07:48:11.286000-04:00"
-            },
-            {
-              "from": "In Testing",
-              "to": "Ready for Acceptance",
-              "when": "Jun 05, 10:45 UTC",
-              "when_iso": "2026-06-05T10:45:47.734000-04:00"
-            }
-          ]
-        },
-        {
-          "key": "TK-21459",
-          "summary": "Unexpected Kits - Uncollected MF-> LEA Wizards Information Message Missing",
-          "type": "Bug",
-          "status": "In Testing",
-          "assignee": "Benjamin Salzberg",
-          "url": "https://invitahealth.atlassian.net/browse/TK-21459",
-          "transitions": [
-            {
-              "from": "Ready for Testing",
-              "to": "In Testing",
-              "when": "Jun 05, 07:47 UTC",
-              "when_iso": "2026-06-05T07:47:50.435000-04:00"
             }
           ]
         }
