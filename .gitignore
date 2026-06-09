@@ -1,0 +1,25 @@
+# Zappa settings contain Jira credentials — never commit
+zappa_settings.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# Zappa build artifacts
+.zappa_settings_backup*
+handler_venv/
+package.json
+package-lock.json
+
+# macOS
+.DS_Store
+
+# Environment files
+.env
+*.env

@@ -519,14 +519,40 @@ def api_sr_activity():
 
 @app.route("/api/epic-progress")
 def api_epic_progress():
-    try:
-        data = fetch_epic_progress()
-        return jsonify(data)
-    except Exception as exc:
-        import traceback
-        tb = traceback.format_exc()
-        print(tb)
-        return jsonify({"error": str(exc), "traceback": tb}), 500
+    """
+    Serve pre-generated epic progress data from S3.
+
+    The data is written hourly by the generate_epic_progress Lambda event.
+    Reading from S3 sidesteps the API Gateway 29-second hard timeout that
+    would otherwise kill the ~60-second Jira crawl done by fetch_epic_progress().
+
+    Falls back to calling Jira live when running locally (no DATA_BUCKET set).
+    """
+    data_bucket = os.environ.get("DATA_BUCKET")
+    if data_bucket:
+        # Production path: read from S3
+        try:
+            import boto3
+            import json as _json
+            s3  = boto3.client("s3")
+            obj = s3.get_object(Bucket=data_bucket, Key="epic-progress.json")
+            raw = _json.loads(obj["Body"].read().decode("utf-8"))
+            return jsonify(raw)
+        except Exception as exc:
+            import traceback
+            tb = traceback.format_exc()
+            print(tb)
+            return jsonify({"error": str(exc), "traceback": tb}), 500
+    else:
+        # Local dev fallback: call Jira live (slow, but no S3 available locally)
+        try:
+            data = fetch_epic_progress()
+            return jsonify(data)
+        except Exception as exc:
+            import traceback
+            tb = traceback.format_exc()
+            print(tb)
+            return jsonify({"error": str(exc), "traceback": tb}), 500
 
 
 @app.route("/health")
