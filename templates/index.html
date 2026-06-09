@@ -168,6 +168,34 @@
     .ip-table tr:last-child td { border-bottom:none; }
     .ip-table tr:hover td { background:#f7f9ff; }
     .ip-summary { color:#374151; max-width:380px; }
+
+    /* ── SR tab two-column layout ── */
+    .sr-tab-layout { display:flex; gap:1.2rem; align-items:flex-start; }
+    .sr-tab-main   { flex:1; min-width:0; }
+    .sr-tab-aside  { width:340px; flex-shrink:0; position:sticky; top:100px; }
+
+    /* ── Disturbed Queue panel ── */
+    .dq-panel        { background:#fff; border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,.07); overflow:hidden; }
+    .dq-panel-header { padding:.7rem 1rem; background:#f8faff; border-bottom:1px solid #e8edf8; font-size:.82rem; font-weight:700; color:#1e2130; display:flex; align-items:center; gap:.4rem; }
+    .dq-panel-sub    { margin-left:auto; font-size:.72rem; font-weight:600; color:#94a3b8; }
+    .dq-panel-loading { padding:1.25rem; text-align:center; }
+    .dq-stats        { padding:.55rem .9rem; border-bottom:1px solid #f0f2f8; display:flex; align-items:center; gap:.4rem; font-size:.74rem; flex-wrap:wrap; }
+    .dq-stat         { color:#374151; font-weight:600; }
+    .dq-stat-sep     { color:#d1d5db; }
+    .dq-stat-crit    { color:#b91c1c; font-weight:700; }
+    .dq-item         { padding:.5rem .9rem; border-bottom:1px solid #f0f2f8; }
+    .dq-item:last-child { border-bottom:none; }
+    .dq-item:hover   { background:#f7f9ff; }
+    .dq-item-top     { display:flex; align-items:center; gap:.35rem; flex-wrap:wrap; }
+    .dq-item-sub     { font-size:.69rem; color:#6b7280; margin-top:.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .dq-key          { font-weight:700; font-size:.78rem; text-decoration:none; white-space:nowrap; }
+    .dq-key:hover    { text-decoration:underline; }
+    .dq-age-badge    { font-size:.68rem; font-weight:700; padding:.1rem .32rem; border-radius:3px; white-space:nowrap; }
+    .dq-age-ok       { background:#dcfce7; color:#15803d; }
+    .dq-age-warn     { background:#fef3c7; color:#b45309; }
+    .dq-age-crit     { background:#fee2e2; color:#b91c1c; }
+    .dq-status-badge { display:inline-block; border-radius:3px; padding:.1rem .35rem; font-size:.68rem; font-weight:700; color:#fff; white-space:nowrap; }
+    .dq-error        { padding:.75rem .9rem; font-size:.78rem; color:#b91c1c; }
   </style>
 </head>
 <body>
@@ -229,10 +257,26 @@
 
   <!-- Tab 2 -->
   <div class="tab-content" id="tab-srs">
-    <div class="state-box" id="srs-loading"><div class="spinner-ring"></div><div class="text-muted">Loading…</div></div>
-    <div class="state-box" id="srs-error" style="display:none"><i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i><div class="mt-2 text-danger fw-semibold" id="srs-error-msg"></div></div>
-    <div class="state-box" id="srs-empty" style="display:none"><i class="bi bi-check2-circle text-success fs-2"></i><div class="mt-2 text-muted">No SR activity from the team in the last 24 hours.</div></div>
-    <div id="srs-container"></div>
+    <div class="sr-tab-layout">
+      <div class="sr-tab-main">
+        <div class="state-box" id="srs-loading"><div class="spinner-ring"></div><div class="text-muted">Loading…</div></div>
+        <div class="state-box" id="srs-error" style="display:none"><i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i><div class="mt-2 text-danger fw-semibold" id="srs-error-msg"></div></div>
+        <div class="state-box" id="srs-empty" style="display:none"><i class="bi bi-check2-circle text-success fs-2"></i><div class="mt-2 text-muted">No SR activity from the team in the last 24 hours.</div></div>
+        <div id="srs-container"></div>
+      </div>
+      <div class="sr-tab-aside">
+        <div class="dq-panel">
+          <div class="dq-panel-header">
+            <i class="bi bi-funnel-fill"></i> Disturbed Queue
+            <span class="dq-panel-sub">Dev Support</span>
+          </div>
+          <div id="dq-loading" class="dq-panel-loading">
+            <div class="spinner-ring" style="width:22px;height:22px;border-width:2px;margin-bottom:0"></div>
+          </div>
+          <div id="dq-body"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Tab 3 -->
@@ -570,10 +614,58 @@
     }
   }
 
+  function renderDisturbedQueue(data) {
+    const {count, median_age, critical, tickets} = data;
+    const statsHtml = `<div class="dq-stats">
+      <span class="dq-stat">${count} in Dev Support</span>
+      <span class="dq-stat-sep">·</span>
+      <span class="dq-stat">median ${median_age}d</span>
+      <span class="dq-stat-sep">·</span>
+      <span class="dq-stat-crit">${critical} critical</span>
+    </div>`;
+    if (!tickets.length) {
+      return statsHtml + '<div style="padding:.75rem .9rem;font-size:.78rem;color:#94a3b8">No tickets in Dev Support.</div>';
+    }
+    const statusColors = {'Done':'#1e8449','In Progress':'#1a5276','Needs More Info':'#6c3483','TODO':'#7f8c8d'};
+    const items = tickets.map(t => {
+      const ageCls   = t.age_days > 7 ? 'dq-age-crit' : t.age_days > 3 ? 'dq-age-warn' : 'dq-age-ok';
+      const keyColor = t.age_days > 7 ? '#b91c1c'      : t.age_days > 3 ? '#b45309'      : '#15803d';
+      const statusBg = statusColors[t.inferred_status] || '#7f8c8d';
+      const pBadge   = t.priority ? `<span class="priority-badge ${priorityClass(t.priority)}">P${esc(t.priority)}</span>` : '';
+      const summ     = t.summary.length > 55 ? t.summary.slice(0,55)+'…' : t.summary;
+      const tkHtml   = t.linked_tk
+        ? ` · <a href="https://invitahealth.atlassian.net/browse/${esc(t.linked_tk)}" target="_blank" style="color:#1a56db">${esc(t.linked_tk)}</a>`
+        : '';
+      return `<div class="dq-item">
+        <div class="dq-item-top">
+          <a class="dq-key" href="${esc(t.url)}" target="_blank" style="color:${keyColor}">${esc(t.key)}</a>
+          ${pBadge}
+          <span class="dq-age-badge ${ageCls}">${t.age_days}d</span>
+          <span class="ms-auto"><span class="dq-status-badge" style="background:${statusBg}">${esc(t.inferred_status)}</span></span>
+        </div>
+        <div class="dq-item-sub">${esc(t.assignee.split(' ')[0])}${tkHtml} · ${esc(summ)}</div>
+      </div>`;
+    }).join('');
+    return statsHtml + `<div class="dq-list">${items}</div>`;
+  }
+
+  async function loadDisturbedQueue() {
+    document.getElementById('dq-loading').style.display = '';
+    document.getElementById('dq-body').innerHTML = '';
+    try {
+      const data = await fetchJSON('/api/disturbed-queue');
+      document.getElementById('dq-loading').style.display = 'none';
+      document.getElementById('dq-body').innerHTML = renderDisturbedQueue(data);
+    } catch(err) {
+      document.getElementById('dq-loading').style.display = 'none';
+      document.getElementById('dq-body').innerHTML = `<div class="dq-error"><i class="bi bi-exclamation-triangle me-1"></i>${esc(err.message)}</div>`;
+    }
+  }
+
   function refreshAll() {
     const btn = document.getElementById("reload-btn");
     btn.classList.add("spinning");
-    Promise.all([loadEpics(), loadSRs(), loadEpicProgress()])
+    Promise.all([loadEpics(), loadSRs(), loadEpicProgress(), loadDisturbedQueue()])
       .finally(() => btn.classList.remove("spinning"));
     switchTab(activeTab);
   }

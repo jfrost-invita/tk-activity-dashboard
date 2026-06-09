@@ -245,7 +245,7 @@ def fetch_sr_activity(window_hours: int = WINDOW_HOURS) -> dict:
 
     # ── 1. SR tickets updated in the window ───────────────────────────────
     sr_issues = jira.search_jql(
-        f'project=SR AND updated >= "{since_str}" ORDER BY updated DESC',
+        f'project=SR AND "DNAF Software Product" = "Track-Kit" AND updated >= "{since_str}" ORDER BY updated DESC',
         ["summary", "status", "priority", "reporter", "assignee", "comment", "issuelinks"],
     )
 
@@ -344,6 +344,83 @@ def fetch_sr_activity(window_hours: int = WINDOW_HOURS) -> dict:
         "window_hours": window_hours,
         "total_srs":    len(results),
         "results":      results,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Disturbed Queue — SR tickets in Dev Support
+# ---------------------------------------------------------------------------
+
+def fetch_disturbed_queue() -> dict:
+    """SR tickets currently in Dev Support for TK, with inferred work status."""
+    jira = JiraClient()
+    now  = datetime.now(timezone.utc)
+
+    TK_SR_JQL    = 'project=SR AND "DNAF Software Product" = "Track-Kit"'
+    DEV_SUP_CRIT = 7
+
+    dev_issues = jira.search_jql(
+        f'{TK_SR_JQL} AND status = "Dev Support" ORDER BY created ASC',
+        ["summary", "assignee", "priority", "created", "issuelinks"],
+    )
+
+    def _linked_tk(fields):
+        for lnk in (fields.get("issuelinks") or []):
+            linked = lnk.get("outwardIssue") or lnk.get("inwardIssue")
+            if linked and linked.get("key", "").startswith("TK-"):
+                return linked["key"]
+        return None
+
+    tk_keys = list({_linked_tk(i["fields"]) for i in dev_issues if _linked_tk(i["fields"])})
+    tk_statuses: dict = {}
+    if tk_keys:
+        for tk in jira.search_jql(f'issuekey in ({",".join(tk_keys)})', ["status"]):
+            tk_statuses[tk["key"]] = (tk["fields"].get("status") or {}).get("name", "")
+
+    DONE_S     = {"Done","Closed","Resolved","Released to Client","Ready for Acceptance",
+                  "Dev Approved","Ready for Testing","In Testing","Blocked (QA)","Testing","Ready For QA"}
+    IN_PROG_S  = {"In Progress","In Code Review","In Development","In Review","Dev Support","In Testing"}
+    NEEDS_INFO = {"Needs More Info","Waiting for Customer","Pending Customer"}
+
+    def _infer(tk_key):
+        s = tk_statuses.get(tk_key, "") if tk_key else ""
+        if s in DONE_S:     return "Done"
+        if s in NEEDS_INFO: return "Needs More Info"
+        if s in IN_PROG_S or (s and s not in {"Not Started", ""}): return "In Progress"
+        return "TODO"
+
+    def _age(created_str):
+        dt = parse_jira_datetime(created_str)
+        return max(0, (now - dt).days) if dt else 0
+
+    tickets = []
+    for issue in dev_issues:
+        fields  = issue["fields"]
+        tk_key  = _linked_tk(fields)
+        age     = _age(fields.get("created", ""))
+        tickets.append({
+            "key":             issue["key"],
+            "url":             f"{JIRA_BASE}/browse/{issue['key']}",
+            "summary":         fields.get("summary", ""),
+            "priority":        (fields.get("priority") or {}).get("name", ""),
+            "assignee":        (fields.get("assignee") or {}).get("displayName", "Unassigned"),
+            "age_days":        age,
+            "linked_tk":       tk_key,
+            "tk_status":       tk_statuses.get(tk_key, "") if tk_key else "",
+            "inferred_status": _infer(tk_key),
+        })
+
+    ages     = sorted(t["age_days"] for t in tickets)
+    n        = len(ages)
+    median   = ages[n // 2] if ages else 0
+    critical = sum(1 for a in ages if a > DEV_SUP_CRIT)
+
+    return {
+        "generated_at": now.strftime("%Y-%m-%d %H:%M UTC"),
+        "count":        n,
+        "median_age":   median,
+        "critical":     critical,
+        "tickets":      tickets,
     }
 
 
@@ -553,6 +630,18 @@ def api_epic_progress():
             tb = traceback.format_exc()
             print(tb)
             return jsonify({"error": str(exc), "traceback": tb}), 500
+
+
+@app.route("/api/disturbed-queue")
+def api_disturbed_queue():
+    try:
+        data = fetch_disturbed_queue()
+        return jsonify(data)
+    except Exception as exc:
+        import traceback
+        tb = traceback.format_exc()
+        print(tb)
+        return jsonify({"error": str(exc), "traceback": tb}), 500
 
 
 @app.route("/health")
