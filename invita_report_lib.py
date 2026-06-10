@@ -5,9 +5,11 @@ import warnings
 from typing import Optional
 from datetime import date, datetime, timedelta
 
-from urllib3.exceptions import NotOpenSSLWarning
-
-warnings.filterwarnings('ignore', category=NotOpenSSLWarning)
+try:
+    from urllib3.exceptions import NotOpenSSLWarning
+    warnings.filterwarnings('ignore', category=NotOpenSSLWarning)
+except ImportError:
+    pass
 
 import requests
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side

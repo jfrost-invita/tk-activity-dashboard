@@ -19,6 +19,7 @@ package-lock.json
 
 # macOS
 .DS_Store
+*.pkg
 
 # Environment files
 .env

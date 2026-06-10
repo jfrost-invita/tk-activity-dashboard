@@ -46,11 +46,12 @@ EPIC_IGNORE_LIST = {"TK-20593", "TK-1156"}
 CLOSED_STATUSES = {
     "Done", "Closed", "Resolved", "Released to Client",
     "Not a Defect", "Duplicate", "Ready for Acceptance", "Dev Approved",
+    "Ready for Testing", "Testing", "Blocked (QA)",
 }
 ACTIVE_STATUSES = {
     "In Progress", "In Development", "Code Review", "In Review",
     "In QA", "QA In Progress", "Ready for QA", "In CR", "In Testing",
-    "Ready for Code Review", "Developing", "Ready for Testing",
+    "Ready for Code Review", "Developing",
 }
 
 

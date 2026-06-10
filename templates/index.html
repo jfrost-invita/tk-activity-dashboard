@@ -168,6 +168,7 @@
     .ip-table tr:last-child td { border-bottom:none; }
     .ip-table tr:hover td { background:#f7f9ff; }
     .ip-summary { color:#374151; max-width:380px; }
+    .ep-filter-note { font-size:.74rem; color:#6b7280; margin-bottom:.9rem; display:flex; align-items:flex-start; gap:.35rem; line-height:1.5; }
 
     /* ── SR tab two-column layout ── */
     .sr-tab-layout { display:flex; gap:1.2rem; align-items:flex-start; }
@@ -284,6 +285,7 @@
     <div class="state-box" id="progress-loading"><div class="spinner-ring"></div><div class="text-muted">Loading epic progress…</div></div>
     <div class="state-box" id="progress-error" style="display:none"><i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i><div class="mt-2 text-danger fw-semibold" id="progress-error-msg"></div></div>
     <div class="state-box" id="progress-empty" style="display:none"><i class="bi bi-layers text-secondary fs-2"></i><div class="mt-2 text-muted">No Executing epics found.</div></div>
+    <div class="ep-filter-note"><i class="bi bi-info-circle" style="margin-top:.1rem;flex-shrink:0"></i><span>Tickets are counted as <strong>done</strong> when in any closed or resolved state, plus <strong>Ready for Testing</strong>, <strong>Testing</strong>, <strong>Dev Approved</strong>, and <strong>Blocked (QA)</strong>.</span></div>
     <div id="progress-container"></div>
   </div>
 
